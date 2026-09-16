@@ -10,6 +10,7 @@ on:
       - "benchmarks/**"
       - "README.md"
       - ".github/workflows/docs.yml"
+  workflow_dispatch:
 
 permissions:
   pages: write
