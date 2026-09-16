@@ -34,7 +34,6 @@ dependencies = [
 Homepage = "https://github.com/kargarisaac/lerim"
 Documentation = "https://docs.lerim.dev"
 Repository = "https://github.com/kargarisaac/lerim"
-Changelog = "https://github.com/kargarisaac/lerim/blob/main/CHANGELOG.md"
 Issues = "https://github.com/kargarisaac/lerim/issues"
 
 [project.optional-dependencies]

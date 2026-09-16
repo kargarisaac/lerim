@@ -29,9 +29,7 @@ if str(REPO_ROOT) not in sys.path:
 PUBLIC_TEXT_GLOBS = ("*.md", "*.json", "*.jsonl", "*.svg", "*.toml", "*.yaml", "*.yml")
 PUBLIC_TEXT_ROOT_NAMES = (
     "README.md",
-    "COMMERCIAL.md",
     "CONTRIBUTING.md",
-    "CHANGELOG.md",
     "assets",
     "benchmarks/README.md",
     "benchmarks/results/README.md",
@@ -51,8 +49,6 @@ RELEASE_TRACKING_ROOT_NAMES = (
     ".python-version",
     "assets",
     "benchmarks",
-    "CHANGELOG.md",
-    "COMMERCIAL.md",
     "CONTRIBUTING.md",
     "Dockerfile",
     "docs",

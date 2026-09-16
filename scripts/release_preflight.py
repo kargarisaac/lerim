@@ -23,7 +23,7 @@ FINAL_RELEASE_VERSION_RE = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     """Parse release preflight command-line arguments."""
     parser = argparse.ArgumentParser(
-        description="Validate tag, pyproject, changelog, and PyPI release state.",
+        description="Validate tag, pyproject, and PyPI release state.",
     )
     parser.add_argument(
         "--tag",
@@ -41,12 +41,6 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
         type=Path,
         default=Path("pyproject.toml"),
         help="Path to pyproject.toml.",
-    )
-    parser.add_argument(
-        "--changelog",
-        type=Path,
-        default=Path("CHANGELOG.md"),
-        help="Path to CHANGELOG.md.",
     )
     parser.add_argument(
         "--package",
@@ -128,22 +122,6 @@ def final_version_tuple(version: str) -> tuple[int, int, int] | None:
     return tuple(int(part) for part in match.groups())
 
 
-def changelog_release_date(changelog_path: Path, version: str) -> date | None:
-    """Return the parsed changelog release date for the version."""
-    changelog = changelog_path.read_text(encoding="utf-8")
-    pattern = rf"^## \[{re.escape(version)}\] - (?P<date>\d{{4}}-\d{{2}}-\d{{2}})$"
-    match = re.search(pattern, changelog, flags=re.MULTILINE)
-    if not match:
-        return None
-    try:
-        return date.fromisoformat(match.group("date"))
-    except ValueError as exc:
-        raise SystemExit(
-            f"{changelog_path} has an invalid release date for {version}: "
-            f"{match.group('date')}"
-        ) from exc
-
-
 def pypi_version_exists(package_name: str, version: str, timeout_seconds: float) -> bool:
     """Return whether the package version already exists on PyPI."""
     url = PYPI_VERSION_URL.format(package=package_name, version=version)
@@ -201,9 +179,6 @@ def validate_release(args: argparse.Namespace) -> str:
             f"expected release {expected_version!r} does not match pyproject version "
             f"{package_version!r}"
         )
-    if changelog_release_date(args.changelog, expected_version) is None:
-        raise SystemExit(f"{args.changelog} is missing a dated section for {expected_version}")
-
     package_name = args.package or metadata["name"]
     if not args.skip_pypi:
         if pypi_version_exists(

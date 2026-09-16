@@ -22,7 +22,6 @@ def write_release_files(
     directory: Path,
     *,
     pyproject_version: str = "0.3.0",
-    changelog_version: str = "0.3.0",
 ) -> None:
     """Write minimal release metadata files into a temporary directory."""
     (directory / "pyproject.toml").write_text(
@@ -33,16 +32,6 @@ version = "{pyproject_version}"
 """.lstrip(),
         encoding="utf-8",
     )
-    (directory / "CHANGELOG.md").write_text(
-        f"""
-# Changelog
-
-## [Unreleased]
-
-## [{changelog_version}] - 2026-05-20
-""".lstrip(),
-        encoding="utf-8",
-    )
 
 
 def test_release_preflight_accepts_matching_metadata(
@@ -50,7 +39,7 @@ def test_release_preflight_accepts_matching_metadata(
     monkeypatch: pytest.MonkeyPatch,
     capsys: pytest.CaptureFixture[str],
 ) -> None:
-    """Preflight passes when version, package metadata, and changelog agree."""
+    """Preflight passes when version and package metadata agree."""
     write_release_files(tmp_path)
     monkeypatch.chdir(tmp_path)
 
@@ -72,15 +61,13 @@ def test_release_preflight_rejects_tag_without_v(tmp_path: Path) -> None:
                 "--skip-pypi",
                 "--pyproject",
                 str(tmp_path / "pyproject.toml"),
-                "--changelog",
-                str(tmp_path / "CHANGELOG.md"),
             ]
         )
 
 
 def test_release_preflight_rejects_prerelease_tag(tmp_path: Path) -> None:
     """Release tags that update latest must be final SemVer releases."""
-    write_release_files(tmp_path, pyproject_version="0.3.0rc1", changelog_version="0.3.0rc1")
+    write_release_files(tmp_path, pyproject_version="0.3.0rc1")
 
     with pytest.raises(SystemExit, match="final SemVer tag"):
         release_preflight.main(
@@ -90,15 +77,13 @@ def test_release_preflight_rejects_prerelease_tag(tmp_path: Path) -> None:
                 "--skip-pypi",
                 "--pyproject",
                 str(tmp_path / "pyproject.toml"),
-                "--changelog",
-                str(tmp_path / "CHANGELOG.md"),
             ]
         )
 
 
 def test_release_preflight_rejects_prerelease_version(tmp_path: Path) -> None:
     """Explicit release versions must also be final SemVer releases."""
-    write_release_files(tmp_path, pyproject_version="0.3.0rc1", changelog_version="0.3.0rc1")
+    write_release_files(tmp_path, pyproject_version="0.3.0rc1")
 
     with pytest.raises(SystemExit, match="final SemVer version"):
         release_preflight.main(
@@ -108,8 +93,6 @@ def test_release_preflight_rejects_prerelease_version(tmp_path: Path) -> None:
                 "--skip-pypi",
                 "--pyproject",
                 str(tmp_path / "pyproject.toml"),
-                "--changelog",
-                str(tmp_path / "CHANGELOG.md"),
             ]
         )
 
@@ -128,8 +111,6 @@ def test_release_preflight_rejects_tag_version_disagreement(tmp_path: Path) -> N
                 "--skip-pypi",
                 "--pyproject",
                 str(tmp_path / "pyproject.toml"),
-                "--changelog",
-                str(tmp_path / "CHANGELOG.md"),
             ]
         )
 
@@ -162,52 +143,6 @@ def test_release_preflight_rejects_pyproject_mismatch(tmp_path: Path) -> None:
                 "--skip-pypi",
                 "--pyproject",
                 str(tmp_path / "pyproject.toml"),
-                "--changelog",
-                str(tmp_path / "CHANGELOG.md"),
-            ]
-        )
-
-
-def test_release_preflight_rejects_missing_changelog_section(tmp_path: Path) -> None:
-    """Preflight fails when the changelog section was not finalized."""
-    write_release_files(tmp_path, changelog_version="0.2.1")
-
-    with pytest.raises(SystemExit, match="missing a dated section"):
-        release_preflight.main(
-            [
-                "--version",
-                "0.3.0",
-                "--skip-pypi",
-                "--pyproject",
-                str(tmp_path / "pyproject.toml"),
-                "--changelog",
-                str(tmp_path / "CHANGELOG.md"),
-            ]
-        )
-
-
-def test_release_preflight_rejects_invalid_changelog_date(tmp_path: Path) -> None:
-    """Preflight fails when the changelog release heading has an invalid date."""
-    write_release_files(tmp_path)
-    (tmp_path / "CHANGELOG.md").write_text(
-        """
-# Changelog
-
-## [0.3.0] - 2026-99-99
-""".lstrip(),
-        encoding="utf-8",
-    )
-
-    with pytest.raises(SystemExit, match="invalid release date"):
-        release_preflight.main(
-            [
-                "--version",
-                "0.3.0",
-                "--skip-pypi",
-                "--pyproject",
-                str(tmp_path / "pyproject.toml"),
-                "--changelog",
-                str(tmp_path / "CHANGELOG.md"),
             ]
         )
 
@@ -227,8 +162,6 @@ def test_release_preflight_rejects_existing_pypi_version(
                 "0.3.0",
                 "--pyproject",
                 str(tmp_path / "pyproject.toml"),
-                "--changelog",
-                str(tmp_path / "CHANGELOG.md"),
             ]
         )
 
@@ -248,8 +181,6 @@ def test_release_preflight_accepts_missing_pypi_version(
             "0.3.0",
             "--pyproject",
             str(tmp_path / "pyproject.toml"),
-            "--changelog",
-            str(tmp_path / "CHANGELOG.md"),
         ]
     )
 
@@ -272,8 +203,6 @@ def test_release_preflight_rejects_lower_than_existing_pypi_final(
                 "0.3.0",
                 "--pyproject",
                 str(tmp_path / "pyproject.toml"),
-                "--changelog",
-                str(tmp_path / "CHANGELOG.md"),
             ]
         )
 
@@ -294,8 +223,6 @@ def test_release_preflight_rejects_equal_to_existing_pypi_final(
                 "0.3.0",
                 "--pyproject",
                 str(tmp_path / "pyproject.toml"),
-                "--changelog",
-                str(tmp_path / "CHANGELOG.md"),
             ]
         )
 
@@ -305,7 +232,7 @@ def test_release_preflight_accepts_newer_than_existing_pypi_final(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """A release newer than the highest existing final version can proceed."""
-    write_release_files(tmp_path, pyproject_version="0.3.1", changelog_version="0.3.1")
+    write_release_files(tmp_path, pyproject_version="0.3.1")
     monkeypatch.setattr(release_preflight, "pypi_version_exists", lambda *_args: False)
     monkeypatch.setattr(release_preflight, "highest_pypi_final_version", lambda *_args: "0.3.0")
 
@@ -315,8 +242,6 @@ def test_release_preflight_accepts_newer_than_existing_pypi_final(
             "0.3.1",
             "--pyproject",
             str(tmp_path / "pyproject.toml"),
-            "--changelog",
-            str(tmp_path / "CHANGELOG.md"),
         ]
     )
 
@@ -408,7 +333,5 @@ def test_release_preflight_reports_pypi_check_failures(
                 "0.3.0",
                 "--pyproject",
                 str(tmp_path / "pyproject.toml"),
-                "--changelog",
-                str(tmp_path / "CHANGELOG.md"),
             ]
         )

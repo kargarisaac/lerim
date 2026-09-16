@@ -751,7 +751,6 @@ def test_validate_public_artifacts_rejects_stale_generated_report_copy(
 @pytest.mark.parametrize(
     "relative_path",
     [
-        "COMMERCIAL.md",
         "assets/README.md",
         "docs/assets/leak.svg",
         "benchmarks/README.md",

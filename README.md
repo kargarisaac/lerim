@@ -265,7 +265,7 @@ To read the codebase, start with
 Lerim core is Apache-2.0. The local CLI, runtime, self-hosted sync server,
 native trace parsing, context DB schema, benchmark scripts, and integration docs
 stay usable without any paid account. Any hosted or commercial offering sits
-outside the open-source core. See COMMERCIAL.md for the open-source scope.
+outside the open-source core.
 
 ## Contributing
 
