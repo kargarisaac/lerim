@@ -10,7 +10,7 @@ that read completed sessions automatically. Everything else uses the **custom
 agent path** below. Both paths feed the same compiler and the same context store.
 
 <p align="center">
-  <img src="../assets/lerim-context-loop.svg" alt="Lerim's context loop: your agent produces a completed run, Lerim captures and compiles it into cited context, and that context is served back into the next run." width="860">
+  <img src="../../assets/lerim-context-loop.svg" alt="Lerim's context loop: your agent produces a completed run, Lerim captures and compiles it into cited context, and that context is served back into the next run." width="860">
 </p>
 
 ## 1. Does your agent have a native adapter?

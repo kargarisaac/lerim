@@ -15,7 +15,7 @@ Both paths end in the same record format, so a custom workflow gets the same
 extraction pipeline as a coding agent.
 
 <p align="center">
-  <img src="../assets/lerim-custom-trace-folder.svg" alt="Clean custom traces flowing into Lerim context records" width="860">
+  <img src="../../assets/lerim-custom-trace-folder.svg" alt="Clean custom traces flowing into Lerim context records" width="860">
 </p>
 
 ## User Journey

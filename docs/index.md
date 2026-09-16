@@ -2,8 +2,6 @@
 
 Lerim is a context compiler. It compiles completed agent traces into cited, reusable context.
 
-_Lerim is an independent open-source project by [Nablo](https://nablo.io). It is not part of the Nablo pipeline and does not train models._
-
 It filters noisy execution history into evidence-backed context records:
 decisions, preferences, constraints, facts, references, and compact episode
 history.
