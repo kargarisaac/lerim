@@ -79,3 +79,4 @@ evals/dataset/traces/
 
 # Local debug/test output
 output/
+.codex/
