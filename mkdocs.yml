@@ -1,8 +1,8 @@
 site_name: Lerim
 site_url: https://docs.lerim.dev
 site_description: Lerim is a context compiler that turns completed agent traces into cited, reusable context.
-repo_url: https://github.com/nablo-io/lerim
-repo_name: nablo-io/lerim
+repo_url: https://github.com/kargarisaac/lerim
+repo_name: kargarisaac/lerim
 edit_uri: edit/main/docs/
 
 theme:
@@ -91,7 +91,7 @@ extra_css:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/nablo-io/lerim
+      link: https://github.com/kargarisaac/lerim
     - icon: fontawesome/brands/python
       link: https://pypi.org/project/lerim/
 

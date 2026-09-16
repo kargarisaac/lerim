@@ -12,13 +12,13 @@
 <p align="center">
   <a href="https://pypi.org/project/lerim/"><img src="https://img.shields.io/pypi/v/lerim?style=flat-square&color=d4a44a" alt="PyPI version"></a>
   <a href="https://pypi.org/project/lerim/"><img src="https://img.shields.io/badge/python-3.11%2B-3776AB?style=flat-square" alt="Python 3.11+"></a>
-  <a href="https://github.com/nablo-io/lerim/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-blue?style=flat-square" alt="License"></a>
-  <a href="https://github.com/nablo-io/lerim/actions"><img src="https://img.shields.io/github/actions/workflow/status/nablo-io/lerim/ci.yml?style=flat-square&label=tests" alt="Tests"></a>
-  <a href="https://github.com/nablo-io/lerim"><img src="https://img.shields.io/github/stars/nablo-io/lerim?style=flat-square" alt="GitHub stars"></a>
+  <a href="https://github.com/kargarisaac/lerim/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-blue?style=flat-square" alt="License"></a>
+  <a href="https://github.com/kargarisaac/lerim/actions"><img src="https://img.shields.io/github/actions/workflow/status/kargarisaac/lerim/ci.yml?style=flat-square&label=tests" alt="Tests"></a>
+  <a href="https://github.com/kargarisaac/lerim"><img src="https://img.shields.io/github/stars/kargarisaac/lerim?style=flat-square" alt="GitHub stars"></a>
 </p>
 
 <p align="center">
-  <a href="https://docs.nablo.io">Docs</a>
+  <a href="https://docs.lerim.dev">Docs</a>
   ·
   <a href="docs/benchmarks/index.md">Benchmarks</a>
   ·
@@ -26,7 +26,7 @@
   ·
   <a href="https://pypi.org/project/lerim/">PyPI</a>
   ·
-  <a href="https://github.com/nablo-io/lerim/blob/main/LICENSE">License</a>
+  <a href="https://github.com/kargarisaac/lerim/blob/main/LICENSE">License</a>
 </p>
 
 # Lerim
@@ -253,7 +253,7 @@ tests/run_tests.sh unit
 Node.js 20+ must be on `PATH`; the trace-parsing tests shell out to the pinned
 `@letta-ai/trajectory` normalizer.
 
-See the [Contributing Guide](https://docs.nablo.io/contributing/getting-started/)
+See the [Contributing Guide](https://docs.lerim.dev/contributing/getting-started/)
 for full dev setup, the live test suites, and the release checklist.
 
 To read the codebase, start with
@@ -282,7 +282,7 @@ Good starting points include:
 
 Helpful links:
 
-- [Contributing Guide](https://docs.nablo.io/contributing/getting-started/)
-- [Open issues](https://github.com/nablo-io/lerim/issues)
+- [Contributing Guide](https://docs.lerim.dev/contributing/getting-started/)
+- [Open issues](https://github.com/kargarisaac/lerim/issues)
 - Trace-source plumbing: `src/lerim/adapters/`
 - Upstream adapter guide: [letta-ai/trajectory](https://github.com/letta-ai/trajectory)
