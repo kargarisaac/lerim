@@ -3,7 +3,7 @@
     {
       "role": "meta",
       "source": "openclaw",
-      "cwd": "/home/user/workspace",
+      "cwd": "/workspace/user/workspace",
       "model": "claude-opus-4-8"
     },
     {

@@ -1,4 +1,4 @@
-{"type":"session","version":7,"id":"openclaw-session-0002","timestamp":"2026-07-06T14:00:00.000Z","cwd":"/home/user/notes"}
+{"type":"session","version":7,"id":"openclaw-session-0002","timestamp":"2026-07-06T14:00:00.000Z","cwd":"/workspace/user/notes"}
 {"type":"message","id":"entry-10","parentId":null,"timestamp":"2026-07-06T14:00:01.000Z","message":{"role":"user","content":[{"type":"text","text":"Summarize the meeting photo I sent."},{"type":"image","data":"AAAA","mimeType":"image/png"}]}}
 {"type":"message"
 {"type":"custom","id":"entry-11","timestamp":"2026-07-06T14:00:02.000Z","data":{"kind":"heartbeat"}}
